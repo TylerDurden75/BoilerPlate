@@ -11,20 +11,25 @@
   "author": "Ray Thibault",
   "devDependencies": {
     "@babel/core": "^7.14.6",
+    "auto-bind": "^4.0.0",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "copy-webpack-plugin": "^9.0.1",
     "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
     "glslify-loader": "^2.0.0",
+    "gsap": "^3.7.0",
     "image-minimizer-webpack-plugin": "^2.2.0",
     "imagemin": "^8.0.0",
     "imagemin-gifsicle": "^7.0.0",
     "imagemin-jpegtran": "^7.0.0",
     "imagemin-optipng": "^8.0.0",
     "imagemin-svgo": "^9.0.0",
+    "include-media": "^1.4.10",
     "mini-css-extract-plugin": "^1.6.1",
     "postcss-loader": "^6.1.0",
+    "prefix": "^1.0.0",
+    "raw-loader": "^4.0.2",
     "sass": "^1.35.1",
     "sass-loader": "^12.1.0",
     "terser-webpack-plugin": "^5.1.4",
@@ -43,6 +48,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
     "prismic-dom": "^2.2.5",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "ua-parser-js": "^0.7.28"
   }
 }
