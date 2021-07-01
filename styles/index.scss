@@ -6,13 +6,17 @@
 @import "./utils/vendors.scss";
 @import "./utils/responsive.scss";
 
+@import "./shared/vertical-titles.scss";
 @import "./shared/descriptions.scss";
+// @import "./shared/pages";
 @import "./shared/titles.scss";
 
 @import "./base/font.scss";
 @import "./base/base.scss";
 
 @import "./components/preloader.scss";
+
+// @import "./layout/navigation";
 
 @import "./pages/about/about.scss";
 @import "./pages/about/content.scss";

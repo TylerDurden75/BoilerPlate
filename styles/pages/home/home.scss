@@ -1,20 +1,36 @@
 .home {
+  @extend %cover;
+  @extend %center;
+
+  align-items: center;
+  background: $color-contessa;
+  color: $color-quarter-spanish-white;
+  text-align: center;
 }
+
 .home__wrapper {
 }
+
 .home__titles {
+  @extend %vertical-titles;
 }
 
 .home__titles__label {
+  @extend %vertical-titles_label;
 }
 
 .home__titles__title {
+  @extend %vertical-titles_title;
 }
 
 .home__gallery {
+  @extend %cover;
+
+  // visibility: hidden;
 }
 
 .home__gallery__media {
+  position: absolute;
 }
 
 .home__gallery__media__image {
