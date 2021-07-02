@@ -109,8 +109,6 @@
   width: 36.2rem;
 
   a {
-    @extend %link;
-
     color: $color-white;
 
     &:after {

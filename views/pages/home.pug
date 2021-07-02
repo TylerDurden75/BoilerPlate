@@ -8,16 +8,13 @@ block content
         .home__wrapper
             .home__titles
                 each collection, index in collections
-                    .home__titles__label
-                        .home__titles__label__text=`${home.data.collection} ${Numbers(index)}`
-
-                    .home__titles__title
-                        .home__titles__title__text=collection.data.title
+                    .home__titles__label=`${home.data.collection} ${Numbers(index)}`
+                        .home__titles__title=collection.data.title
 
             .home__gallery
                 each media in home.data.gallery
                     figure.home__gallery__media
-                        img.home__gallery__media__image(alt=media.image.alt src=media.image.url)
+                        img.home__gallery__media__image(alt=media.image.alt data-src=media.image.url)
                         
             a.home__link(href=Links(home.data.collections))=home.data.button
                 svg.home__link__icon(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 288 60")

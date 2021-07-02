@@ -2,18 +2,14 @@
 *:after,
 *:before {
   box-sizing: border-box;
-  user-select: none;
 }
 
 html {
   @extend %cover;
-
-  background: $color-contessa;
-  color: $color-quarter-spanish-white;
   font-size: calc(100vw / 1920 * 10);
   line-height: 1;
-  overflow: hidden;
   position: fixed;
+  overflow: hidden;
 
   @include media("<phone") {
     font-size: calc(100vw / 750 * 10);
@@ -34,12 +30,6 @@ a {
   text-decoration: none;
 }
 
-canvas {
-  pointer-events: none;
-  position: relative;
-  z-index: z("canvas");
-}
-
 button {
   background: none;
   border: none;
@@ -49,49 +39,9 @@ button {
 }
 
 img {
-  opacity: 0;
-  transition: opacity 0.4s ease;
   vertical-align: middle;
-
-  &.loaded {
-    opacity: 1;
-  }
 }
 
 .content {
   @extend %cover;
-}
-
-[data-animation="label"],
-[data-animation="paragraph"],
-[data-animation="title"] {
-  span {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: top;
-  }
-}
-
-[data-animation="button"] {
-  display: inline-block;
-  position: relative;
-  white-space: nowrap;
-
-  span {
-    display: inline-block;
-    transform-origin: center center 0.5em;
-    vertical-align: middle;
-  }
-}
-
-[data-animation="link"] {
-  display: inline-block;
-  position: relative;
-  white-space: nowrap;
-
-  span {
-    display: inline-block;
-    transform-origin: center center 0.5em;
-    vertical-align: middle;
-  }
 }

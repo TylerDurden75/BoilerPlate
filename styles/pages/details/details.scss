@@ -1,19 +1,8 @@
 .detail {
-  @extend %center;
   @extend %page;
 
-  // background: $color-quicksand;
-  // color: $color-quarter-spanish-white;
-  transform: translateY(100%);
-  transition: opacity 0.5s 0.5s ease, transform 0s 0.5s,
-    visibility 0.5s 0.5s ease;
-
-  &--active {
-    @extend %page--active;
-
-    transform: translateY(0);
-    transition-delay: 0;
-  }
+  background: $color-quicksand;
+  color: $color-quarter-spanish-white;
 
   @include media("<phone") {
     height: auto;
@@ -23,12 +12,6 @@
 .detail__wrapper {
   align-items: center;
   display: flex;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-
-  .detail--active & {
-    opacity: 1;
-  }
 
   @include media("<phone") {
     display: block;
@@ -69,7 +52,6 @@
   @extend %description-12;
 
   margin-bottom: 4rem;
-  overflow: hidden;
   text-transform: uppercase;
 }
 
@@ -178,7 +160,6 @@
 }
 
 .detail__information__link {
-  @extend %link--hidden;
   @extend %title-30;
 
   display: flex;

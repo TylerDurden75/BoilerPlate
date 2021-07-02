@@ -1,16 +1,26 @@
+import each from "lodash/each";
+
+import Preloader from "./components/Preloader";
+
 import About from "pages/About";
 import Home from "pages/Home";
 import Collections from "pages/Collections";
 import Detail from "pages/Detail";
 
-import each from "lodash/each";
-
 class App {
   constructor() {
+    this.createPreloader();
     this.createContent();
     this.createPages();
 
     this.addLinkListeners();
+
+    this.update();
+  }
+
+  createPreloader() {
+    this.preloader = new Preloader();
+    this.preloader.once("completed", this.onPreloaded.bind(this));
   }
 
   createContent() {
@@ -21,14 +31,17 @@ class App {
   createPages() {
     this.pages = {
       about: new About(),
-      home: new Home(),
       collections: new Collections(),
       detail: new Detail(),
+      home: new Home(),
     };
 
     this.page = this.pages[this.template];
     this.page.create();
+  }
 
+  onPreloaded() {
+    this.preloader.destroy();
     this.page.show();
   }
 
@@ -58,6 +71,13 @@ class App {
     } else {
       console.log("Error");
     }
+  }
+
+  update() {
+    if (this.page && this.page.update) {
+      this.page.update();
+    }
+    this.frame = window.requestAnimationFrame(this.update.bind(this));
   }
 
   addLinkListeners() {
