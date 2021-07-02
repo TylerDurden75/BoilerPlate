@@ -1,6 +1,12 @@
 .about {
-  background: $color-cadet-blue;
-  color: $color-bright-gray;
+  @extend %page;
+
+  // background: $color-cadet-blue;
+  // color: $color-bright-gray;
+
+  &--active {
+    @extend %page--active;
+  }
 }
 
 .about__wrapper {
@@ -11,7 +17,37 @@
   @extend %title-100;
 
   margin: auto;
-  max-width: 124rem;
+  max-width: 140rem;
   text-align: center;
-  line-height: 1;
+
+  @include media("<phone") {
+    max-width: 67.7rem;
+  }
+}
+
+.about__footer {
+  bottom: 4rem;
+  display: flex;
+  justify-content: space-between;
+  left: 4rem;
+  position: absolute;
+  right: 4rem;
+  text-transform: uppercase;
+}
+
+.about__footer__copyright {
+}
+
+.about__footer__credits {
+  a {
+    @extend %link--hidden;
+
+    &:first-child {
+      margin-right: 1rem;
+    }
+
+    &:last-child {
+      margin-left: 1rem;
+    }
+  }
 }
