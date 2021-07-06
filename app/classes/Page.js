@@ -1,13 +1,18 @@
 import GSAP from "gsap";
+import NormalizeWheel from "normalize-wheel";
 import Prefix from "prefix";
 
 import each from "lodash/each";
+import map from "lodash/each";
+
+import Title from "../animations/Title";
 
 export default class Page {
   constructor({ element, elements, id }) {
     this.selector = element;
     this.selectorChildren = {
       ...elements,
+      animationsTitles: '[data-animation="title]',
     };
 
     this.id = id;
@@ -45,6 +50,16 @@ export default class Page {
         }
       }
     });
+
+    this.createAnimations();
+  }
+
+  createAnimations() {
+    this.animationsTitles = map(this.elements.animationsTitles, (element) => {
+      return new Title({
+        element,
+      });
+    });
   }
 
   show() {
@@ -80,13 +95,18 @@ export default class Page {
   }
 
   onMouseWheel(event) {
-    const { deltaY } = event;
+    const { pixelY } = NormalizeWheel(event);
 
-    this.scroll.target += deltaY;
+    this.scroll.target += pixelY;
   }
 
   onResize() {
-    this.scroll.limit = this.elements.wrapper.clientHeight;
+    if (this.elements.wrapper) {
+      this.scroll.limit =
+        this.elements.wrapper.clientHeight - window.innerHeight;
+    }
+
+    each(this.animationsTitles, (animation) => animation.onResize());
   }
 
   update() {
@@ -95,6 +115,10 @@ export default class Page {
       this.scroll.limit,
       this.scroll.target
     );
+
+    if (this.scroll.current < 0.01) {
+      this.scroll.current = 0;
+    }
 
     this.scroll.current = GSAP.utils.interpolate(
       this.scroll.current,

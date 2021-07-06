@@ -45,3 +45,9 @@ img {
 .content {
   @extend %cover;
 }
+
+[data-animation="title"] {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+}
