@@ -6,13 +6,26 @@ import each from "lodash/each";
 import map from "lodash/each";
 
 import Title from "../animations/Title";
+import Paragraph from "../animations/Paragraph";
+import Label from "../animations/Label";
+import Highlight from "../animations/Highlight.js";
+
+import AsyncLoad from "./AsyncLoad";
+
+import { ColorsManager } from "./Colors";
 
 export default class Page {
   constructor({ element, elements, id }) {
     this.selector = element;
     this.selectorChildren = {
       ...elements,
-      animationsTitles: '[data-animation="title]',
+
+      animationsHighlights: '[data-animation="highlight"]',
+      animationsLabels: '[data-animation="label"]',
+      animationsParagraphs: '[data-animation="paragraph"]',
+      animationsTitles: '[data-animation="title"]',
+
+      preloaders: "[data-src]",
     };
 
     this.id = id;
@@ -52,18 +65,67 @@ export default class Page {
     });
 
     this.createAnimations();
+    this.createPreloader();
   }
 
   createAnimations() {
+    this.animations = [];
+
+    //Highlight
+    this.animationsHighlights = map(
+      this.elements.animationsHighlights,
+      (element) => {
+        return new Highlight({
+          element,
+        });
+      }
+    );
+
+    this.animations.push(...this.animationsHighlights);
+
+    //Title
     this.animationsTitles = map(this.elements.animationsTitles, (element) => {
       return new Title({
         element,
       });
     });
+
+    this.animations.push(...this.animationsTitles);
+
+    //Paragraph
+    this.animationsParagraphs = map(
+      this.elements.animationsParagraphs,
+      (element) => {
+        return new Paragraph({
+          element,
+        });
+      }
+    );
+
+    this.animations.push(...this.animationsParagraphs);
+
+    //Label
+    this.animationsLabels = map(this.elements.animationsLabels, (element) => {
+      return new Label({
+        element,
+      });
+    });
+
+    this.animations.push(...this.animationsLabels);
+  }
+
+  createPreloader() {
+    this.preloaders = each(this.elements.preloaders, (element) => {
+      return new AsyncLoad({ element });
+    });
   }
 
   show() {
     return new Promise((resolve) => {
+      ColorsManager.change({
+        backgroundColor: this.element.getAttribute("data-background"),
+        color: this.element.getAttribute("data-color"),
+      });
       this.animationIn = GSAP.timeline();
       this.animationIn.from(
         this.element,
@@ -106,7 +168,7 @@ export default class Page {
         this.elements.wrapper.clientHeight - window.innerHeight;
     }
 
-    each(this.animationsTitles, (animation) => animation.onResize());
+    each(this.animations, (animation) => animation.onResize());
   }
 
   update() {

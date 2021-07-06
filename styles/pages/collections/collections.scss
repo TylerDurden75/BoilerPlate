@@ -1,9 +1,8 @@
 .collections {
   @extend %page;
-  @extend %cover;
 
-  background: $color-quicksand;
-  color: $color-quarter-spanish-white;
+  // background: $color-quicksand;
+  // color: $color-quarter-spanish-white;
 }
 
 .collections__wrapper {
@@ -20,15 +19,8 @@
   }
 }
 
-.collections__titles__wrapper {
-}
-
 .collections__titles__label {
   @extend %vertical-titles__label;
-}
-
-.collections__titles__label__text {
-  @extend %vertical-titles__label__text;
 }
 
 .collections__titles__title {
@@ -76,67 +68,22 @@
 .collections__article {
   bottom: 8rem;
   left: 8rem;
+  opacity: 0;
   position: absolute;
+
+  &--active {
+    opacity: 1;
+  }
 }
 
 .collections__article__title {
   @extend %title-60;
-
-  line-height: 1;
-  margin-bottom: 1.5rem;
-  overflow: hidden;
-}
-
-.collections__article__title__text {
-  display: inline-block;
-  transform: translateY(100%);
-  transition: transform 1s $ease-in-out;
-
-  .collections__article--active & {
-    transform: translateY(0);
-    transition-delay: 1s;
-  }
 }
 
 .collections__article__description {
   @extend %description-18;
 
-  span {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: top;
-  }
-
-  span span {
-    transform: translateY(100%);
-    transition: transform 1s $ease-in-out;
-  }
-
-  .collections__article--active & {
-    span span {
-      transform: translateY(0);
-    }
-
-    span:nth-of-type(1) span {
-      transition-delay: 1.05s;
-    }
-
-    span:nth-of-type(2) span {
-      transition-delay: 1.1s;
-    }
-
-    span:nth-of-type(3) span {
-      transition-delay: 1.15s;
-    }
-
-    span:nth-of-type(4) span {
-      transition-delay: 1.2s;
-    }
-
-    span:nth-of-type(5) span {
-      transition-delay: 1.25s;
-    }
-  }
+  max-width: 44rem;
 }
 
 .collections__mobile {
@@ -163,14 +110,4 @@
 .collections__mobile__item__title {
   font-family: $font-george-x;
   font-size: 12rem;
-}
-
-.collections__button {
-  height: 63.1rem;
-  left: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
-  width: 44.7rem;
 }
