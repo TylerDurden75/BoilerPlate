@@ -1,15 +1,11 @@
-import AutoBind from "auto-bind";
 import EventEmitter from "events";
 
 import each from "lodash/each";
 
 export default class Component extends EventEmitter {
-  constructor({ classes, element, elements }) {
+  constructor({ element, elements }) {
     super();
 
-    AutoBind(this);
-
-    this.classes = classes;
     this.selector = element;
     this.selectorChildren = {
       ...elements,
@@ -37,12 +33,12 @@ export default class Component extends EventEmitter {
       ) {
         this.elements[key] = entry;
       } else {
-        this.elements[key] = this.element.querySelectorAll(entry);
+        this.elements[key] = document.querySelectorAll(entry);
 
         if (this.elements[key].length === 0) {
           this.elements[key] = null;
         } else if (this.elements[key].length === 1) {
-          this.elements[key] = this.element.querySelector(entry);
+          this.elements[key] = document.querySelector(entry);
         }
       }
     });

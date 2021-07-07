@@ -3,7 +3,7 @@ import NormalizeWheel from "normalize-wheel";
 import Prefix from "prefix";
 
 import each from "lodash/each";
-import map from "lodash/each";
+import map from "lodash/map";
 
 import Title from "../animations/Title";
 import Paragraph from "../animations/Paragraph";
@@ -120,6 +120,10 @@ export default class Page {
     });
   }
 
+  /**
+   * Animations
+   */
+
   show() {
     return new Promise((resolve) => {
       ColorsManager.change({
@@ -147,7 +151,8 @@ export default class Page {
 
   hide() {
     return new Promise((resolve) => {
-      this.removeEventListeners();
+      this.destroy();
+
       this.animationOut = GSAP.timeline();
       this.animationOut.to(this.element, {
         autoAlpha: 0,
@@ -156,6 +161,9 @@ export default class Page {
     });
   }
 
+  /**
+   * Events
+   */
   onMouseWheel(event) {
     const { pixelY } = NormalizeWheel(event);
 
@@ -171,6 +179,9 @@ export default class Page {
     each(this.animations, (animation) => animation.onResize());
   }
 
+  /**
+   * Loop
+   */
   update() {
     this.scroll.target = GSAP.utils.clamp(
       0,
@@ -178,15 +189,15 @@ export default class Page {
       this.scroll.target
     );
 
-    if (this.scroll.current < 0.01) {
-      this.scroll.current = 0;
-    }
-
     this.scroll.current = GSAP.utils.interpolate(
       this.scroll.current,
       this.scroll.target,
       0.1
     );
+
+    if (this.scroll.current < 0.01) {
+      this.scroll.current = 0;
+    }
 
     if (this.elements.wrapper) {
       this.elements.wrapper.style[
@@ -195,11 +206,21 @@ export default class Page {
     }
   }
 
+  /**
+   * Listeners
+   */
   addEventListeners() {
     window.addEventListener("mousewheel", this.onMouseWheelEvent);
   }
 
   removeEventListeners() {
     window.addEventListener("mousewheel", this.onMouseWheelEvent);
+  }
+
+  /**
+   * Destroy
+   */
+  destroy() {
+    this.removeEventListeners();
   }
 }
