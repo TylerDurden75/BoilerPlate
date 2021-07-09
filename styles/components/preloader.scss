@@ -9,15 +9,16 @@
 }
 
 .preloader__text {
-  @extend %title-53;
-
+  font-size: 0;
   max-width: 67rem;
-  opacity: 0;
+
+  span {
+    display: inline-block;
+    overflow: hidden;
+  }
 
   span span {
     @extend %title-53;
-
-    display: inline-block;
     transform-origin: center center 0.5em;
   }
 }

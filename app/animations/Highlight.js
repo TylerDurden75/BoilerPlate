@@ -18,12 +18,12 @@ export default class Highlight extends Animation {
       this.element,
       {
         autoAlpha: 0,
-        scale: 0.2,
+        scale: 1.2,
       },
       {
         autoAlpha: 1,
         duration: 1.5,
-        ease: "expor.out",
+        ease: "expo.out",
         scale: 1,
       }
     );

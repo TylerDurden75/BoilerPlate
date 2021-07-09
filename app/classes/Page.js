@@ -1,5 +1,5 @@
 import GSAP from "gsap";
-import NormalizeWheel from "normalize-wheel";
+import normalizeWheel from "normalize-wheel";
 import Prefix from "prefix";
 
 import each from "lodash/each";
@@ -8,11 +8,11 @@ import map from "lodash/map";
 import Title from "../animations/Title";
 import Paragraph from "../animations/Paragraph";
 import Label from "../animations/Label";
-import Highlight from "../animations/Highlight.js";
+import Highlight from "../animations/Highlight";
 
 import AsyncLoad from "./AsyncLoad";
 
-import { ColorsManager } from "./Colors";
+import { ColorsManager } from "../classes/Colors";
 
 export default class Page {
   constructor({ element, elements, id }) {
@@ -29,6 +29,7 @@ export default class Page {
     };
 
     this.id = id;
+
     this.transformPrefix = Prefix("transform");
 
     this.onMouseWheelEvent = this.onMouseWheel.bind(this);
@@ -48,18 +49,17 @@ export default class Page {
     each(this.selectorChildren, (entry, key) => {
       if (
         entry instanceof window.HTMLElement ||
-        entry instanceof window.NodeList
+        entry instanceof window.NodeList ||
+        Array.isArray(entry)
       ) {
         this.elements[key] = entry;
-      } else if (Array.isArray(entry)) {
-        this.elements[key] = entry;
       } else {
-        this.elements[key] = this.element.querySelectorAll(entry);
+        this.elements[key] = document.querySelectorAll(entry);
 
         if (this.elements[key].length === 0) {
           this.elements[key] = null;
         } else if (this.elements[key].length === 1) {
-          this.elements[key] = this.element.querySelector(entry);
+          this.elements[key] = document.querySelector(entry);
         }
       }
     });
@@ -71,7 +71,16 @@ export default class Page {
   createAnimations() {
     this.animations = [];
 
-    //Highlight
+    //Titles
+    this.animationsTitles = map(this.elements.animationsTitles, (element) => {
+      return new Title({
+        element,
+      });
+    });
+
+    this.animations.push(...this.animationsTitles);
+
+    //Highlights
     this.animationsHighlights = map(
       this.elements.animationsHighlights,
       (element) => {
@@ -83,16 +92,7 @@ export default class Page {
 
     this.animations.push(...this.animationsHighlights);
 
-    //Title
-    this.animationsTitles = map(this.elements.animationsTitles, (element) => {
-      return new Title({
-        element,
-      });
-    });
-
-    this.animations.push(...this.animationsTitles);
-
-    //Paragraph
+    //Paragraphs
     this.animationsParagraphs = map(
       this.elements.animationsParagraphs,
       (element) => {
@@ -104,7 +104,7 @@ export default class Page {
 
     this.animations.push(...this.animationsParagraphs);
 
-    //Label
+    //Labels
     this.animationsLabels = map(this.elements.animationsLabels, (element) => {
       return new Label({
         element,
@@ -115,7 +115,7 @@ export default class Page {
   }
 
   createPreloader() {
-    this.preloaders = each(this.elements.preloaders, (element) => {
+    this.preloaders = map(this.elements.preloaders, (element) => {
       return new AsyncLoad({ element });
     });
   }
@@ -123,15 +123,15 @@ export default class Page {
   /**
    * Animations
    */
-
   show() {
     return new Promise((resolve) => {
       ColorsManager.change({
         backgroundColor: this.element.getAttribute("data-background"),
         color: this.element.getAttribute("data-color"),
       });
+
       this.animationIn = GSAP.timeline();
-      this.animationIn.from(
+      this.animationIn.fromTo(
         this.element,
         {
           autoAlpha: 0,
@@ -143,7 +143,6 @@ export default class Page {
 
       this.animationIn.call((_) => {
         this.addEventListeners();
-
         resolve();
       });
     });
@@ -154,6 +153,7 @@ export default class Page {
       this.destroy();
 
       this.animationOut = GSAP.timeline();
+
       this.animationOut.to(this.element, {
         autoAlpha: 0,
         onComplete: resolve,
@@ -165,9 +165,9 @@ export default class Page {
    * Events
    */
   onMouseWheel(event) {
-    const { pixelY } = NormalizeWheel(event);
+    const { deltaY } = normalizeWheel(event);
 
-    this.scroll.target += pixelY;
+    this.scroll.target += deltaY;
   }
 
   onResize() {
@@ -214,7 +214,7 @@ export default class Page {
   }
 
   removeEventListeners() {
-    window.addEventListener("mousewheel", this.onMouseWheelEvent);
+    window.removeEventListener("mousewheel", this.onMouseWheelEvent);
   }
 
   /**

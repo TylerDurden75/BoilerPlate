@@ -1,13 +1,14 @@
 import each from "lodash/each";
 
-import Navigation from "./components/Navigation";
-import Preloader from "./components/Preloader";
 import Canvas from "./components/Canvas";
 
-import About from "pages/About";
-import Home from "pages/Home";
-import Collections from "pages/Collections";
-import Detail from "pages/Detail";
+import Navigation from "./components/Navigation";
+import Preloader from "./components/Preloader";
+
+import About from "./pages/About";
+import Collections from "./pages/Collections";
+import Detail from "./pages/Detail";
+import Home from "./pages/Home";
 
 class App {
   constructor() {
@@ -21,8 +22,6 @@ class App {
     this.addEventListeners();
     this.addLinkListeners();
 
-    this.onResize();
-
     this.update();
   }
 
@@ -34,7 +33,7 @@ class App {
 
   createPreloader() {
     this.preloader = new Preloader();
-    this.preloader.once("completed", this.onPreloaded.bind(this));
+    this.preloader.once("Completed", this.onPreloaded.bind(this));
   }
 
   createCanvas() {
@@ -59,20 +58,15 @@ class App {
   }
 
   /**
-   * Events ----------------------------------------------
+   * Events
    */
-
   onPreloaded() {
     this.preloader.destroy();
 
-    this.page.onResize();
+    this.onResize();
 
     this.page.show();
   }
-
-  // onPopState() {
-  //   this.onChange(window.location.pathname);
-  // }
 
   async onChange(url) {
     await this.page.hide();
@@ -82,8 +76,6 @@ class App {
     if (request.status === 200) {
       const html = await request.text();
       const div = document.createElement("div");
-
-      window.history.pushState({}, "", url);
 
       div.innerHTML = html;
 
@@ -100,6 +92,7 @@ class App {
       this.page.create();
 
       this.onResize();
+
       this.page.show();
 
       this.addLinkListeners();
@@ -109,42 +102,15 @@ class App {
   }
 
   onResize() {
-    if (this.canvas && this.canvas.onResize) {
-      this.canvas.onResize();
-    }
-
     if (this.page && this.page.onResize) {
       this.page.onResize();
     }
   }
 
-  onTouchDown(event) {
-    if (this.canvas && this.canvas.onTouchDown) {
-      this.canvas.onTouchDown(event);
-    }
-  }
-
-  onTouchMove(event) {
-    if (this.canvas && this.canvas.onTouchMove) {
-      this.canvas.onTouchMove(event);
-    }
-  }
-
-  onTouchUp(event) {
-    if (this.canvas && this.canvas.onTouchUp) {
-      this.canvas.onTouchUp(event);
-    }
-  }
-
   /**
-   * Loop -----------------------------------------------------
+   * Loop
    */
-
   update() {
-    if (this.canvas && this.canvas.update) {
-      this.canvas.update();
-    }
-
     if (this.page && this.page.update) {
       this.page.update();
     }
@@ -156,15 +122,6 @@ class App {
    * Listeners
    */
   addEventListeners() {
-    // window.addEventListener("popstate", this.onPopState.bind(this));
-    window.addEventListener("mousedown", this.onTouchDown.bind(this));
-    window.addEventListener("mousemove", this.onTouchMove.bind(this));
-    window.addEventListener("mouseup", this.onTouchUp.bind(this));
-
-    window.addEventListener("touchstart", this.onTouchDown.bind(this));
-    window.addEventListener("touchmove", this.onTouchMove.bind(this));
-    window.addEventListener("touchend", this.onTouchUp.bind(this));
-
     window.addEventListener("resize", this.onResize.bind(this));
   }
 
@@ -174,6 +131,7 @@ class App {
     each(links, (link) => {
       link.onclick = (event) => {
         event.preventDefault();
+
         const { href } = link;
 
         this.onChange(href);

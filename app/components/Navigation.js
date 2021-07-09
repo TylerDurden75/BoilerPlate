@@ -1,7 +1,6 @@
-import { each } from "async";
 import GSAP from "gsap";
 
-import Component from "../classes/Components";
+import Component from "../classes/Component";
 
 import { COLOR_BRIGHT_GRAY, COLOR_QUARTER_SPANISH_WHITE } from "../utils/color";
 
@@ -25,13 +24,13 @@ export default class Navigation extends Component {
         duration: 1.5,
       });
 
-      GSAP.to(this.elements.items[0].style, {
+      GSAP.to(this.elements.items[0], {
         autoAlpha: 1,
         delay: 0.75,
         duration: 0.75,
       });
 
-      GSAP.to(this.elements.items[1].style, {
+      GSAP.to(this.elements.items[1], {
         autoAlpha: 0,
         duration: 0.75,
       });
@@ -41,16 +40,17 @@ export default class Navigation extends Component {
         duration: 1.5,
       });
 
-      GSAP.to(this.elements.items[0].style, {
+      GSAP.to(this.elements.items[0], {
         autoAlpha: 0,
         duration: 0.75,
       });
 
-      GSAP.to(this.elements.items[1].style, {
+      GSAP.to(this.elements.items[1], {
         autoAlpha: 1,
         delay: 0.75,
         duration: 0.75,
       });
     }
+    console.log(template);
   }
 }

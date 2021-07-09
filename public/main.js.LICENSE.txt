@@ -26,7 +26,7 @@
 
 /*! ../../shaders/plane-vertex.glsl */
 
-/*! ../animations/Highlight.js */
+/*! ../animations/Highlight */
 
 /*! ../animations/Label */
 
@@ -36,7 +36,9 @@
 
 /*! ../classes/Animation */
 
-/*! ../classes/Components */
+/*! ../classes/Colors */
+
+/*! ../classes/Component */
 
 /*! ../core/Geometry.js */
 
@@ -60,9 +62,7 @@
 
 /*! ./CSSPlugin.js */
 
-/*! ./Colors */
-
-/*! ./Components */
+/*! ./Component */
 
 /*! ./ExecutionEnvironment */
 
@@ -356,6 +356,14 @@
 
 /*! ./overlay */
 
+/*! ./pages/About */
+
+/*! ./pages/Collections */
+
+/*! ./pages/Detail */
+
+/*! ./pages/Home */
+
 /*! ./property */
 
 /*! ./socket */
@@ -386,8 +394,6 @@
 
 /*! ansi-regex */
 
-/*! async */
-
 /*! events */
 
 /*! gsap */
@@ -405,14 +411,6 @@
 /*! normalize-wheel */
 
 /*! ogl */
-
-/*! pages/About */
-
-/*! pages/Collections */
-
-/*! pages/Detail */
-
-/*! pages/Home */
 
 /*! prefix */
 
@@ -481,16 +479,16 @@
   \**********************************/
 
 /*!**********************************!*\
+  !*** ./app/classes/Component.js ***!
+  \**********************************/
+
+/*!**********************************!*\
   !*** ./app/pages/About/index.js ***!
   \**********************************/
 
 /*!**********************************!*\
   !*** ./node_modules/url/util.js ***!
   \**********************************/
-
-/*!***********************************!*\
-  !*** ./app/classes/Components.js ***!
-  \***********************************/
 
 /*!***********************************!*\
   !*** ./app/pages/Detail/index.js ***!
@@ -710,10 +708,6 @@
 
 /*!******************************************!*\
   !*** ./node_modules/ansi-regex/index.js ***!
-  \******************************************/
-
-/*!******************************************!*\
-  !*** ./node_modules/async/dist/async.js ***!
   \******************************************/
 
 /*!******************************************!*\

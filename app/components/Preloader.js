@@ -1,6 +1,6 @@
 import GSAP from "gsap";
 
-import Component from "../classes/Components";
+import Component from "../classes/Component";
 
 import each from "lodash/each";
 
@@ -32,8 +32,6 @@ export default class Preloader extends Component {
       this.elements.title.querySelectorAll("span span");
 
     this.length = 0;
-
-    console.log(this.element, this.elements);
 
     this.createLoader();
   }

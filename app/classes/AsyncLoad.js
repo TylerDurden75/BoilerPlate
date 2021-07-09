@@ -1,4 +1,4 @@
-import Component from "./Components";
+import Component from "../classes/Component";
 
 export default class AsyncLoad extends Component {
   constructor({ element }) {

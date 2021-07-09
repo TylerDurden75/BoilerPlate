@@ -9,7 +9,7 @@ block content
             .home__titles
                 each collection, index in collections
                     .home__titles__label=`${home.data.collection} ${Numbers(index)}`
-                        .home__titles__title=collection.data.title
+                    .home__titles__title=collection.data.title
 
             .home__gallery
                 each media in home.data.gallery

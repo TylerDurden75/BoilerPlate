@@ -58,7 +58,9 @@ img {
 [data-animation="label"],
 [data-animation="paragraph"],
 [data-animation="title"] {
-  display: inline-block;
-  overflow: hidden;
-  vertical-align: top;
+  span {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
 }

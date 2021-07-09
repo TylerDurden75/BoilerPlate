@@ -34,10 +34,9 @@
 .collections__gallery__wrapper {
   align-items: center;
   display: flex;
-  left: 50%;
   position: absolute;
   top: 50%;
-  transform: translate(-50%);
+  transform: translateY(-50%);
 }
 
 .collections__gallery__link {

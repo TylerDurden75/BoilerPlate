@@ -6,32 +6,29 @@ import Animation from "../classes/Animation";
 import { calculate, split } from "../utils/text";
 
 export default class Title extends Animation {
-  constructor(element, elements) {
-    super({ element, elements });
-
-    split({
-      element: this.element,
-      append: true,
+  constructor({ element, elements }) {
+    super({
+      element,
+      elements,
     });
 
-    split({
-      element: this.element,
-      append: true,
-    });
+    split({ element: this.element, append: true });
+    split({ element: this.element, append: true });
 
     this.elementLinesSpans = this.element.querySelectorAll("span span");
   }
 
   animateIn() {
-    this.timeLineIn = GSAP.timeline({
+    this.timelineIn = GSAP.timeline({
       delay: 0.5,
     });
-    this.timeLineIn.set(this.element, {
+
+    this.timelineIn.set(this.element, {
       autoAlpha: 1,
     });
 
     each(this.elementsLines, (line, index) => {
-      this.timeLineIn.fromTo(
+      this.timelineIn.fromTo(
         line,
         {
           y: "100%",

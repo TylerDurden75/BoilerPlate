@@ -1,13 +1,13 @@
 import GSAP from "gsap";
 
-import Component from "./Components";
+import Component from "./Component";
 
 export default class Button extends Component {
   constructor({ element }) {
     super({ element });
 
     this.path = element.querySelector("path:last-child");
-    this.pathLength = this.getTotalLength;
+    this.pathLength = this.path.getTotalLength();
 
     this.timeline = GSAP.timeline({ paused: true });
 
