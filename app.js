@@ -7,6 +7,7 @@ const express = require("express");
 const errorHandlers = require("errorhandler");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
+const find = require("lodash/find");
 
 const app = express();
 const path = require("path");
