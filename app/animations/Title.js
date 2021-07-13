@@ -8,6 +8,7 @@ export default class Title extends Animation {
       element,
       elements,
     });
+  }
 
   animateIn() {
     this.timelineIn = GSAP.timeline({
