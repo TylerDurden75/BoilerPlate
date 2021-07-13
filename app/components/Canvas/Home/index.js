@@ -9,6 +9,7 @@ import Media from "./Media";
 export default class {
   constructor({ gl, scene, sizes }) {
     this.gl = gl;
+    this.scene = scene;
     this.sizes = sizes;
 
     this.group = new Transform();
@@ -17,11 +18,6 @@ export default class {
     this.mediasElements = document.querySelectorAll(
       ".home__gallery__media__image"
     );
-
-    this.createGeometry();
-    this.createGallery();
-
-    this.group.setParent(scene);
 
     this.x = {
       current: 0,
@@ -44,6 +40,13 @@ export default class {
       x: 0,
       y: 0,
     };
+
+    this.createGeometry();
+    this.createGallery();
+
+    this.group.setParent(this.scene);
+
+    this.show();
   }
 
   createGeometry() {
@@ -61,6 +64,17 @@ export default class {
         sizes: this.sizes,
       });
     });
+  }
+
+  /**
+   * Animations
+   */
+  show() {
+    map(this.medias, (media) => media.show());
+  }
+
+  hide() {
+    map(this.medias, (media) => media.hide());
   }
 
   /**
@@ -195,6 +209,6 @@ export default class {
    * Destroy
    */
   destroy() {
-    // this.group.setParent(null);
+    this.scene.removeChild(this.group);
   }
 }

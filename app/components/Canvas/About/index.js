@@ -39,6 +39,17 @@ export default class {
   }
 
   /**
+   * Animations
+   */
+  show() {
+    map(this.galleries, (gallery) => gallery.show());
+  }
+
+  hide() {
+    map(this.galleries, (gallery) => gallery.hide());
+  }
+
+  /**
    * Events
    */
   onResize(event) {
@@ -64,5 +75,12 @@ export default class {
    */
   udpate() {
     map(this.galleries, (gallery) => gallery.udpate());
+  }
+
+  /**
+   * Destroy
+   */
+  destroy() {
+    map(this.galleries, (gallery) => gallery.destroy());
   }
 }

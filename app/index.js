@@ -72,6 +72,8 @@ class App {
   }
 
   async onChange(url) {
+    this.canvas.onChangeStart(this.template);
+
     await this.page.hide();
 
     const request = await window.fetch(url);
@@ -90,6 +92,8 @@ class App {
 
       this.content.setAttribute("data-template", this.template);
       this.content.innerHTML = divContent.innerHTML;
+
+      this.canvas.onChangeEnd(this.template);
 
       this.page = this.pages[this.template];
       this.page.create();
@@ -150,12 +154,12 @@ class App {
    * Loop
    */
   update() {
-    if (this.canvas && this.canvas.update) {
-      this.canvas.update();
-    }
-
     if (this.page && this.page.update) {
       this.page.update();
+    }
+
+    if (this.canvas && this.canvas.update) {
+      this.canvas.update(this.page.scroll);
     }
 
     this.frame = window.requestAnimationFrame(this.update.bind(this));
