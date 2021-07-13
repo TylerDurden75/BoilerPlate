@@ -73,8 +73,8 @@ export default class {
   /**
    * Update
    */
-  udpate() {
-    map(this.galleries, (gallery) => gallery.udpate());
+  udpate(scroll) {
+    map(this.galleries, (gallery) => gallery.udpate(scroll));
   }
 
   /**
