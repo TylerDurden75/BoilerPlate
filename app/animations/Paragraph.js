@@ -1,29 +1,65 @@
-import GSAP from "gsap";
+import each from "lodash/each";
 
-import Animation from "../classes/Animation";
+import Animation from "classes/Animation";
 
-export default class Paragraph extends Animation {
-  constructor(element, elements) {
-    super({ element, elements });
+import { CSS } from "utils/easings";
+import { calculate, split } from "utils/text";
+
+export default class extends Animation {
+  constructor({ element }) {
+    const lines = [];
+    const paragraphs = element.querySelectorAll("h1, h2, p");
+
+    if (paragraphs.length !== 0) {
+      each(paragraphs, (element) => {
+        split({ element });
+        split({ element });
+
+        lines.push(...element.querySelectorAll("span span"));
+      });
+    } else {
+      split({ element });
+      split({ element });
+
+      lines.push(...element.querySelectorAll("span span"));
+    }
+
+    super({
+      element,
+      elements: {
+        lines,
+      },
+    });
+
+    this.onResize();
+
+    if ("IntersectionObserver" in window) {
+      this.animateOut();
+    }
   }
 
   animateIn() {
-    GSAP.fromTo(
-      this.element,
-      {
-        autoAlpha: 0,
-        delay: 0.5,
-      },
-      {
-        autoAlpha: 1,
-        duration: 1,
-      }
-    );
+    super.animateIn();
+
+    each(this.lines, (line, lineIndex) => {
+      each(line, (word) => {
+        word.style.transition = `transform 1.5s ${lineIndex * 0.1}s ${CSS}`;
+        word.style[this.transformPrefix] = "translateY(0)";
+      });
+    });
   }
 
   animateOut() {
-    GSAP.set(this.element, {
-      autoAlpha: 0,
+    super.animateOut();
+
+    each(this.lines, (line) => {
+      each(line, (word) => {
+        word.style[this.transformPrefix] = "translateY(100%)";
+      });
     });
+  }
+
+  onResize() {
+    this.lines = calculate(this.elements.lines);
   }
 }

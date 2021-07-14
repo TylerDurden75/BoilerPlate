@@ -9,10 +9,30 @@
 */
 
 /*!
+ * CustomEase 3.5.1
+ * https://greensock.com
+ *
+ * @license Copyright 2008-2020, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+ */
+
+/*!
  * GSAP 3.7.0
  * https://greensock.com
  *
  * @license Copyright 2008-2021, GreenSock. All rights reserved.
+ * Subject to the terms at https://greensock.com/standard-license or for
+ * Club GreenSock members, the agreement issued with that membership.
+ * @author: Jack Doyle, jack@greensock.com
+*/
+
+/*!
+ * paths 3.7.0
+ * https://greensock.com
+ *
+ * Copyright 2008-2021, GreenSock. All rights reserved.
  * Subject to the terms at https://greensock.com/standard-license or for
  * Club GreenSock members, the agreement issued with that membership.
  * @author: Jack Doyle, jack@greensock.com
@@ -46,6 +66,8 @@
 
 /*! ../math/Quat.js */
 
+/*! ../math/Vec2.js */
+
 /*! ../math/Vec3.js */
 
 /*! ../utils/color */
@@ -73,6 +95,8 @@
 /*! ./Mat4.js */
 
 /*! ./Media */
+
+/*! ./MediaDOM */
 
 /*! ./SockJSClient */
 
@@ -310,6 +334,8 @@
 
 /*! ./functions/QuatFunc.js */
 
+/*! ./functions/Vec2Func.js */
+
 /*! ./functions/Vec3Func.js */
 
 /*! ./get */
@@ -396,9 +422,13 @@
 
 /*! ansi-regex */
 
+/*! classes/Component */
+
 /*! events */
 
 /*! gsap */
+
+/*! gsap/utils/paths */
 
 /*! html-entities */
 
@@ -420,6 +450,10 @@
 
 /*! querystring */
 
+/*! shaders/collections-fragment.glsl */
+
+/*! shaders/collections-vertex.glsl */
+
 /*! shaders/home-fragment.glsl */
 
 /*! shaders/home-vertex.glsl */
@@ -434,11 +468,23 @@
 
 /*! url */
 
+/*! utils/CustomEase */
+
+/*! utils/dom */
+
+/*! utils/easings */
+
+/*! utils/text */
+
 /*! webpack/hot/emitter */
 
 /*!**********************!*\
   !*** ./app/index.js ***!
   \**********************/
+
+/*!**************************!*\
+  !*** ./app/utils/dom.js ***!
+  \**************************/
 
 /*!***************************!*\
   !*** ./app/utils/text.js ***!
@@ -455,6 +501,10 @@
 /*!*****************************!*\
   !*** ./app/classes/Page.js ***!
   \*****************************/
+
+/*!******************************!*\
+  !*** ./app/utils/easings.js ***!
+  \******************************/
 
 /*!*******************************!*\
   !*** ./app/classes/Button.js ***!
@@ -474,6 +524,10 @@
 
 /*!*********************************!*\
   !*** ./app/pages/Home/index.js ***!
+  \*********************************/
+
+/*!*********************************!*\
+  !*** ./app/utils/CustomEase.js ***!
   \*********************************/
 
 /*!*********************************!*\
@@ -721,6 +775,10 @@
   \******************************************/
 
 /*!******************************************!*\
+  !*** ./node_modules/gsap/utils/paths.js ***!
+  \******************************************/
+
+/*!******************************************!*\
   !*** ./node_modules/lodash/_DataView.js ***!
   \******************************************/
 
@@ -857,6 +915,10 @@
   \*******************************************/
 
 /*!*******************************************!*\
+  !*** ./node_modules/ogl/src/math/Vec2.js ***!
+  \*******************************************/
+
+/*!*******************************************!*\
   !*** ./node_modules/ogl/src/math/Vec3.js ***!
   \*******************************************/
 
@@ -946,6 +1008,10 @@
 
 /*!*********************************************!*\
   !*** ./app/components/Canvas/Home/index.js ***!
+  \*********************************************/
+
+/*!*********************************************!*\
+  !*** ./app/shaders/collections-vertex.glsl ***!
   \*********************************************/
 
 /*!*********************************************!*\
@@ -1085,6 +1151,10 @@
   \**********************************************/
 
 /*!***********************************************!*\
+  !*** ./app/shaders/collections-fragment.glsl ***!
+  \***********************************************/
+
+/*!***********************************************!*\
   !*** ./node_modules/lodash/_arrayLikeKeys.js ***!
   \***********************************************/
 
@@ -1144,6 +1214,10 @@
   !*** ./node_modules/ogl/src/core/Transform.js ***!
   \************************************************/
 
+/*!************************************************!*\
+  !*** ./node_modules/ogl/src/extras/Raycast.js ***!
+  \************************************************/
+
 /*!*************************************************!*\
   !*** ./node_modules/html-entities/lib/index.js ***!
   \*************************************************/
@@ -1188,6 +1262,10 @@
   !*** ./node_modules/lodash/_baseMatchesProperty.js ***!
   \*****************************************************/
 
+/*!*******************************************************!*\
+  !*** ./app/components/Canvas/Collections/MediaDOM.js ***!
+  \*******************************************************/
+
 /*!********************************************************!*\
   !*** ./node_modules/html-entities/lib/xml-entities.js ***!
   \********************************************************/
@@ -1206,6 +1284,10 @@
 
 /*!*********************************************************!*\
   !*** ./node_modules/ogl/src/math/functions/QuatFunc.js ***!
+  \*********************************************************/
+
+/*!*********************************************************!*\
+  !*** ./node_modules/ogl/src/math/functions/Vec2Func.js ***!
   \*********************************************************/
 
 /*!*********************************************************!*\
