@@ -4,6 +4,8 @@ import Home from "./Home";
 import About from "./About";
 import Collections from "./Collections";
 
+import Transition from "./Transition";
+
 export default class Canvas {
   constructor({ template }) {
     this.template = template;
@@ -105,7 +107,7 @@ export default class Canvas {
     this.onChangeEnd(this.template);
   }
 
-  onChangeStart() {
+  onChangeStart(template, url) {
     if (this.about) {
       this.about.hide();
     }
@@ -116,6 +118,21 @@ export default class Canvas {
 
     if (this.home) {
       this.home.hide();
+    }
+
+    this.isFromCollectionstoDetail =
+      this.template === "collections" && url.indexOf("detail") > -1;
+    this.isFromDetailtoCollections =
+      this.template === "detail" && url.indexOf("collections") > -1;
+
+    if (this.isFromCollectionstoDetail || this.isFromDetailtoCollections) {
+      this.transition = new Transition({
+        collections: this.collections,
+        gl: this.gl,
+        scene: this.scene,
+        sizes: this.sizes,
+        url,
+      });
     }
   }
 
