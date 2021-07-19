@@ -12,20 +12,12 @@
     margin-bottom: 0;
   }
 
-  &:nth-child(3) {
-    margin-top: 30rem;
-  }
-
   &:nth-child(5) {
     justify-content: flex-end;
   }
 
   &:nth-child(8) {
     justify-content: flex-start;
-  }
-
-  &:nth-child(9) {
-    margin-top: 40rem;
   }
 
   @include media("<phone") {
@@ -91,15 +83,12 @@
 }
 
 .about__content__label {
-  font-size: 1.2rem;
-  letter-spacing: 0.032rem;
-  line-height: 2;
+  @extend %description-12;
+
   text-transform: uppercase;
   width: 18rem;
-
   @include media("<=phone") {
     font-size: 2.4rem;
-    line-height: 1.5;
     padding-right: 2.5rem;
     width: 15rem;
   }
@@ -108,25 +97,16 @@
 .about__content__description {
   width: 36.2rem;
 
-  a {
-    color: $color-white;
-
-    &:after {
-      bottom: 0.3rem;
-    }
-  }
-
   p:not(:first-child) {
     margin-top: 2.5rem;
   }
-
   @include media("<=phone") {
-    width: calc(100% - 15rem);
+    width: calc(100% -15rem);
+    margin-left: 6rem;
   }
 }
 
 .about__content__media {
-  overflow: hidden;
   position: relative;
 
   .about__content:nth-child(3) & {

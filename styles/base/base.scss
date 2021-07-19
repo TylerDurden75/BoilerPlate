@@ -9,10 +9,10 @@ html {
   @extend %cover;
   font-size: calc(100vw / 1920 * 10);
   line-height: 1;
-  position: fixed;
-  overflow: hidden;
-  background: $color-contessa;
-  color: $color-quarter-spanish-white;
+  // position: fixed;
+  // overflow: hidden;
+  // background: $color-contessa;
+  // color: $color-quarter-spanish-white;
 
   @include media("<phone") {
     font-size: calc(100vw / 750 * 10);
@@ -20,11 +20,10 @@ html {
 }
 
 body {
-  @extend %cover;
-  @extend %description-18;
+  // @extend %cover;
+  @extend %description-16;
 
   font-family: $font-suisse-bp;
-  position: fixed;
 }
 
 a {
@@ -33,11 +32,11 @@ a {
   text-decoration: none;
 }
 
-canvas {
-  pointer-events: none;
-  position: relative;
-  z-index: z("canvas");
-}
+// canvas {
+//   pointer-events: none;
+//   position: relative;
+//   z-index: z("canvas");
+// }
 
 button {
   background: none;
@@ -48,26 +47,26 @@ button {
 }
 
 img {
-  opacity: 0;
-  width: 100%;
-  transition: opacity 0.4s ease;
+  // opacity: 0;
+  // width: 100%;
+  // transition: opacity 0.4s ease;
   vertical-align: middle;
 
-  &.loaded {
-    opacity: 1;
-  }
+  //   &.loaded {
+  //     opacity: 1;
+  //   }
 }
 
-.content {
-  @extend %cover;
-}
+// .content {
+//   @extend %cover;
+// }
 
-[data-animation="label"],
-[data-animation="paragraph"],
-[data-animation="title"] {
-  span {
-    display: inline-block;
-    overflow: hidden;
-    vertical-align: top;
-  }
-}
+// [data-animation="label"],
+// [data-animation="paragraph"],
+// [data-animation="title"] {
+//   span {
+//     display: inline-block;
+//     overflow: hidden;
+//     vertical-align: top;
+//   }
+// }

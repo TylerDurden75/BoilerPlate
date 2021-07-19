@@ -43,7 +43,7 @@
   text-transform: uppercase;
   width: 9.6rem;
 
-  @include media("<=phone") {
+  @include media("<phone") {
     font-size: 2.4rem;
     margin-top: 6.5rem;
     top: 90rem;
@@ -52,11 +52,6 @@
 }
 
 .about__highlight__link[href] {
-  transition: color 0.4s ease;
-
-  &:hover {
-    color: $color-white;
-  }
 }
 
 .about__highlight__title {
@@ -76,12 +71,11 @@
 
 .about__highlight__media {
   height: 76rem;
-  overflow: hidden;
   position: absolute;
   width: 54rem;
 
   .about__highlight:nth-child(4) & {
-    height: 52.8rem;
+    height: 62.8rem;
     width: 36rem;
   }
 
@@ -102,14 +96,14 @@
 
       &:first-child {
         left: 50%;
-        top: 0;
         transform: translateX(-50%);
+        top: 0;
       }
 
       &:last-child {
-        bottom: 0;
         right: 50%;
         transform: translateX(50%);
+        bottom: 0;
       }
     }
   }
