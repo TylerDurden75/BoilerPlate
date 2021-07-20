@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "backend:build": "node app.js",
-    "backend:development": "nodemon app.js",
+    "backend:development": "node app.js",
     "frontend:build": "webpack --progress --config webpack.config.build.js",
     "frontend:development": "webpack serve --progress --config webpack.config.development.js",
     "start": "concurrently --kill-others \"npm run backend:development\" \"npm run frontend:development\""
@@ -18,7 +18,7 @@
     "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
     "glslify-loader": "^2.0.0",
-    "gsap": "^3.7.0",
+    "gsap": "^3.7.1",
     "image-minimizer-webpack-plugin": "^2.2.0",
     "imagemin": "^8.0.0",
     "imagemin-gifsicle": "^7.0.0",

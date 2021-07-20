@@ -1,10 +1,13 @@
 .about {
+  @extend %page;
+
   background: $color-cadet-blue;
   color: $color-bright-gray;
   opacity: 0;
 }
 
 .about__wrapper {
+  padding-top: 10rem;
 }
 
 .about__title {
