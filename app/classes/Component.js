@@ -1,6 +1,5 @@
-import EventEmitter from "events";
-
 import each from "lodash/each";
+import EventEmitter from "events";
 
 export default class Component extends EventEmitter {
   constructor({ element, elements }) {
@@ -17,12 +16,7 @@ export default class Component extends EventEmitter {
   }
 
   create() {
-    if (this.selector instanceof window.HTMLElement) {
-      this.element = this.selector;
-    } else {
-      this.element = document.querySelector(this.selector);
-    }
-
+    this.element = document.querySelector(this.selector);
     this.elements = {};
 
     each(this.selectorChildren, (entry, key) => {
@@ -35,9 +29,9 @@ export default class Component extends EventEmitter {
       } else {
         this.elements[key] = document.querySelectorAll(entry);
 
-        if (this.elements[key].length === 0) {
+        if (this.elements[key] === 0) {
           this.elements[key] = null;
-        } else if (this.elements[key].length === 1) {
+        } else if (this.elements[key] === 1) {
           this.elements[key] = document.querySelector(entry);
         }
       }
