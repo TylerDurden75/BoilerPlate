@@ -1,6 +1,7 @@
 import each from "lodash/each";
 
-import Preloader from "./components/Preloader";
+import Navigation from "components/Navigation";
+import Preloader from "components/Preloader";
 
 import About from "pages/About";
 import Collections from "pages/Collections";
@@ -9,13 +10,22 @@ import Home from "pages/Home";
 
 class App {
   constructor() {
-    this.createPreloader();
     this.createContent();
+
+    this.createPreloader();
+    this.createNavigation();
     this.createPages();
 
+    this.addEventListeners();
     this.addLinkListeners();
 
     this.update();
+  }
+
+  createNavigation() {
+    this.navigation = new Navigation({
+      template: this.template,
+    });
   }
 
   createPreloader() {
@@ -40,8 +50,14 @@ class App {
     this.page.create();
   }
 
+  /**
+   * Events.
+   */
   onPreloaded() {
     this.preloader.destroy();
+
+    this.onResize();
+
     this.page.show();
   }
 
@@ -59,11 +75,16 @@ class App {
 
       this.template = divContent.getAttribute("data-template");
 
+      this.navigation.onChange(this.template);
+
       this.content.setAttribute("data-template", this.template);
       this.content.innerHTML = divContent.innerHTML;
 
       this.page = this.pages[this.template];
       this.page.create();
+
+      this.onResize();
+
       this.page.show();
 
       this.addLinkListeners();
@@ -72,12 +93,28 @@ class App {
     }
   }
 
+  onResize() {
+    if (this.page && this.page.onResize) {
+      this.page.onResize();
+    }
+  }
+
+  /**
+   * Loop.
+   */
   update() {
     if (this.page && this.page.update) {
       this.page.update();
     }
 
     this.frame = window.requestAnimationFrame(this.update.bind(this));
+  }
+
+  /**
+   * Listeners.
+   */
+  addEventListeners() {
+    window.addEventListener("resize", this.onResize.bind(this));
   }
 
   addLinkListeners() {

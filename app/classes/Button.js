@@ -1,6 +1,6 @@
-import GSAP from "gsap";
+import gsap from "gsap";
 
-import Component from "./Component";
+import Component from "classes/Component";
 
 export default class Button extends Component {
   constructor({ element }) {
@@ -9,7 +9,7 @@ export default class Button extends Component {
     this.path = element.querySelector("path:last-child");
     this.pathLength = this.path.getTotalLength();
 
-    this.timeline = GSAP.timeline({ paused: true });
+    this.timeline = gsap.timeline({ paused: true });
 
     this.timeline.fromTo(
       this.path,
@@ -25,10 +25,12 @@ export default class Button extends Component {
   }
 
   onMouseEnter() {
+    console.log("enter");
     this.timeline.play();
   }
 
   onMouseLeave() {
+    console.log("leave");
     this.timeline.reverse();
   }
 

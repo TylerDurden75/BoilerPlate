@@ -9,11 +9,15 @@ html {
   @extend %cover;
   font-size: calc(100vw / 1920 * 10);
   line-height: 1;
-  overflow: hidden;
-  position: fixed;
 
-  // background: $color-contessa;
-  // color: $color-quarter-spanish-white;
+  /*
+  * Changing property break scroll event
+  */
+  // overflow: hidden;
+  // position: fixed;
+
+  background: $color-contessa;
+  color: $color-quarter-spanish-white;
 
   @include media("<phone") {
     font-size: calc(100vw / 750 * 10);
@@ -25,7 +29,11 @@ body {
   @extend %description-16;
 
   font-family: $font-suisse-bp;
-  position: fixed;
+
+  /*
+  * Changing property break scroll event
+  */
+  // position: fixed;
 }
 
 a {
@@ -49,26 +57,26 @@ button {
 }
 
 img {
-  // opacity: 0;
+  opacity: 0;
   // width: 100%;
-  // transition: opacity 0.4s ease;
+  transition: opacity 0.4s ease;
   vertical-align: middle;
 
-  //   &.loaded {
-  //     opacity: 1;
-  //   }
+  &.loaded {
+    opacity: 1;
+  }
 }
 
 .content {
   @extend %cover;
 }
 
-// [data-animation="label"],
-// [data-animation="paragraph"],
-// [data-animation="title"] {
-//   span {
-//     display: inline-block;
-//     overflow: hidden;
-//     vertical-align: top;
-//   }
-// }
+[data-animation="label"],
+[data-animation="paragraph"],
+[data-animation="title"] {
+  span {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+  }
+}

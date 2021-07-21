@@ -2,10 +2,10 @@
   @extend %center;
   @extend %page;
 
-  background: $color-contessa;
-  color: $color-quarter-spanish-white;
-  text-align: center;
+  // background: $color-contessa;
+  // color: $color-quarter-spanish-white;
   overflow: hidden;
+  text-align: center;
 
   &:before,
   &:after {

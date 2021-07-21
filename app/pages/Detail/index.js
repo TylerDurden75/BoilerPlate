@@ -1,5 +1,5 @@
-import Button from "../../classes/Button";
-import Page from "../../classes/Page";
+import Button from "classes/Button";
+import Page from "classes/Page";
 
 export default class Detail extends Page {
   constructor() {

@@ -1,28 +1,38 @@
-import GSAP from "gsap";
+import gsap from "gsap";
+import Animation from "classes/Animation";
 
-import Animation from "../classes/Animation";
+import each from "lodash/each";
 
 export default class Highlight extends Animation {
-  constructor(element, elements) {
-    super({ element, elements });
+  constructor({ element, elements }) {
+    super({
+      element,
+      elements,
+    });
   }
 
   animateIn() {
-    GSAP.fromTo(
+    this.timeLineIn = gsap.timeline({
+      delay: 0.5,
+    });
+
+    this.timeLineIn.fromTo(
       this.element,
       {
         autoAlpha: 0,
-        delay: 0.5,
+        scale: 1.2,
       },
       {
         autoAlpha: 1,
-        duration: 1,
+        duration: 1.5,
+        ease: "expo.out",
+        scale: 1,
       }
     );
   }
 
   animateOut() {
-    GSAP.set(this.element, {
+    gsap.set(this.element, {
       autoAlpha: 0,
     });
   }
