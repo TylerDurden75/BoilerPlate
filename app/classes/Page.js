@@ -1,5 +1,4 @@
 import gsap from "gsap";
-import normalizeWheel from "normalize-wheel";
 import Prefix from "prefix";
 
 import each from "lodash/each";
@@ -29,8 +28,6 @@ export default class Page {
     this.id = id;
 
     this.transformPrefix = Prefix("transform");
-
-    this.onMouseWheelEvent = this.onMouseWheel.bind(this);
 
     // console.log(this.transformPrefix);
   }
@@ -164,20 +161,17 @@ export default class Page {
   /**
    * Events.
    */
-  onMouseWheel(event) {
-    const { pixelY } = normalizeWheel(event);
-
-    console.log(pixelY);
-
-    this.scroll.target += pixelY;
-  }
 
   onResize() {
-    // if (this.elements.wrapper) {
-    //   this.scroll.limit =
-    //     this.elements.wrapper.clientHeight - window.innerHeight;
-    // }
-    // each(this.animations, (animation) => animation.onResize());
+    if (this.elements.wrapper) {
+      this.scroll.limit =
+        this.elements.wrapper.clientHeight - window.innerHeight;
+    }
+    each(this.animations, (animation) => animation.onResize());
+  }
+
+  onWheel({ pixelY }) {
+    this.scroll.target += pixelY;
   }
 
   /**
@@ -210,13 +204,9 @@ export default class Page {
   /**
    * Listeners.
    */
-  addEventListeners() {
-    window.addEventListener("mousewheel", this.onMouseWheelEvent);
-  }
+  addEventListeners() {}
 
-  removeEventListeners() {
-    window.removeEventListener("mousewheel", this.onMouseWheelEvent);
-  }
+  removeEventListeners() {}
 
   /**
    * Destroy.

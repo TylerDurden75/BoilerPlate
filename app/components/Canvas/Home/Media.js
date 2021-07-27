@@ -1,8 +1,9 @@
-import GSAP from "gsap";
-import { Mesh, Program } from "ogl";
+import { Mesh, Program, Texture } from "ogl";
 
-import fragment from "shaders/home-fragment.glsl";
-import vertex from "shaders/home-vertex.glsl";
+import gsap from "gsap";
+
+import fragment from "shaders/plane-fragment.glsl";
+import vertex from "shaders/plane-vertex.glsl";
 
 export default class {
   constructor({ element, geometry, gl, index, scene, sizes }) {
@@ -13,23 +14,23 @@ export default class {
     this.scene = scene;
     this.sizes = sizes;
 
+    this.createProgram();
+    this.createTexture();
+    this.createMesh();
+
     this.extra = {
       x: 0,
       y: 0,
     };
-
-    this.createTexture();
-    this.createProgram();
-    this.createMesh();
-    this.createBounds({
-      sizes: this.sizes,
-    });
   }
 
   createTexture() {
-    const image = this.element;
+    this.texture = new Texture(this.gl);
 
-    this.texture = window.TEXTURES[image.getAttribute("data-src")];
+    this.image = new window.Image();
+    this.image.crossOrigin = "anonymous";
+    this.image.src = this.element.getAttribute("data-src");
+    this.image.onload = (_) => (this.texture.image = this.image);
   }
 
   createProgram() {
@@ -37,9 +38,6 @@ export default class {
       fragment,
       vertex,
       uniforms: {
-        uAlpha: { value: 0 },
-        uSpeed: { value: 0 },
-        uViewportSizes: { value: [this.sizes.width, this.sizes.height] },
         tMap: { value: this.texture },
       },
     });
@@ -52,7 +50,7 @@ export default class {
     });
 
     this.mesh.setParent(this.scene);
-    // this.mesh.rotation.z = GSAP.utils.random(-Math.PI * 0.03, Math.PI * 0.03)
+    this.mesh.rotation.z = gsap.utils.random(-Math.PI * 0.03, Math.PI * 0.03);
   }
 
   createBounds({ sizes }) {
@@ -64,45 +62,6 @@ export default class {
     this.updateX();
     this.updateY();
   }
-
-  /**
-   * Animations.
-   */
-  show(isPreloaded) {
-    const delay = isPreloaded ? 2.5 : 0;
-
-    this.timelineIn = GSAP.timeline({
-      delay: GSAP.utils.random(delay, delay + 1.5),
-    });
-
-    this.timelineIn.fromTo(
-      this.program.uniforms.uAlpha,
-      {
-        value: 0,
-      },
-      {
-        duration: 2,
-        ease: "expo.inOut",
-        value: 0.4,
-      },
-      "start"
-    );
-
-    this.timelineIn.fromTo(
-      this.mesh.position,
-      {
-        z: GSAP.utils.random(2, 6),
-      },
-      {
-        duration: 2,
-        ease: "expo.inOut",
-        z: 0,
-      },
-      "start"
-    );
-  }
-
-  hide() {}
 
   /**
    * Events.
@@ -119,7 +78,7 @@ export default class {
   }
 
   /**
-   * Loop.
+   * Loops.
    */
   updateScale() {
     this.height = this.bounds.height / window.innerHeight;
@@ -131,7 +90,6 @@ export default class {
 
   updateX(x = 0) {
     this.x = (this.bounds.left + x) / window.innerWidth;
-
     this.mesh.position.x =
       -this.sizes.width / 2 +
       this.mesh.scale.x / 2 +
@@ -141,7 +99,6 @@ export default class {
 
   updateY(y = 0) {
     this.y = (this.bounds.top + y) / window.innerHeight;
-
     this.mesh.position.y =
       this.sizes.height / 2 -
       this.mesh.scale.y / 2 -
@@ -149,10 +106,9 @@ export default class {
       this.extra.y;
   }
 
-  update(scroll, speed) {
-    this.updateX();
+  update(scroll) {
+    if (!this.bounds) return;
+    this.updateX(scroll.x);
     this.updateY(scroll.y);
-
-    this.program.uniforms.uSpeed.value = speed;
   }
 }

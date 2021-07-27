@@ -9,6 +9,8 @@ export default class Home extends Page {
 
       element: ".home",
       elements: {
+        wrapper: ".home__wrapper",
+
         navigation: document.querySelector(".navigation"),
         link: ".home__link",
       },
@@ -25,7 +27,5 @@ export default class Home extends Page {
 
   destroy() {
     super.destroy();
-
-    this.link.removeEventListeners();
   }
 }

@@ -13,8 +13,8 @@ html {
   /*
   * Changing property break scroll event
   */
-  // overflow: hidden;
-  // position: fixed;
+  overflow: hidden;
+  position: fixed;
 
   background: $color-contessa;
   color: $color-quarter-spanish-white;
@@ -33,7 +33,7 @@ body {
   /*
   * Changing property break scroll event
   */
-  // position: fixed;
+  position: fixed;
 }
 
 a {

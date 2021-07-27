@@ -1,10 +1,10 @@
-import { Plane, Transform } from "ogl";
-
-import GSAP from "gsap";
-
-import map from "lodash/map";
+import gsap from "gsap";
 
 import Gallery from "./Gallery";
+
+import { Plane, Transform } from "ogl";
+
+import map from "lodash/map";
 
 export default class {
   constructor({ gl, scene, sizes }) {
@@ -39,48 +39,30 @@ export default class {
   }
 
   /**
-   * Animations
-   */
-  show() {
-    map(this.galleries, (gallery) => gallery.show());
-  }
-
-  hide() {
-    map(this.galleries, (gallery) => gallery.hide());
-  }
-
-  /**
-   * Events
+   * Events.
    */
   onResize(event) {
     map(this.galleries, (gallery) => gallery.onResize(event));
   }
 
-  onTouchDown({ event }) {
+  onTouchDown(event) {
     map(this.galleries, (gallery) => gallery.onTouchDown(event));
   }
 
-  onTouchMove({ event }) {
+  onTouchMove(event) {
     map(this.galleries, (gallery) => gallery.onTouchMove(event));
-  }
-
-  onTouchUp({ event }) {
-    map(this.galleries, (gallery) => gallery.onTouchUp(event));
   }
 
   onWheel({ pixelX, pixelY }) {}
 
-  /**
-   * Update
-   */
-  udpate(scroll) {
-    map(this.galleries, (gallery) => gallery.udpate(scroll));
+  onTouchUp(event) {
+    map(this.galleries, (gallery) => gallery.onTouchUp(event));
   }
 
   /**
-   * Destroy
+   * Update
    */
-  destroy() {
-    map(this.galleries, (gallery) => gallery.destroy());
+  update() {
+    map(this.galleries, (gallery) => gallery.update());
   }
 }
