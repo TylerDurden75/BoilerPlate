@@ -9,6 +9,7 @@ import map from "lodash/map";
 export default class {
   constructor({ gl, scene, sizes }) {
     this.gl = gl;
+    this.scene = scene;
     this.sizes = sizes;
 
     this.group = new Transform();
@@ -17,11 +18,6 @@ export default class {
     this.mediasElements = document.querySelectorAll(
       ".home__gallery__media__image"
     );
-
-    this.createGeometry();
-    this.createGallery();
-
-    this.group.setParent(scene);
 
     this.x = {
       current: 0,
@@ -44,6 +40,13 @@ export default class {
       x: 0,
       y: 0,
     };
+
+    this.createGeometry();
+    this.createGallery();
+
+    this.group.setParent(this.scene);
+
+    this.show();
   }
 
   createGeometry() {
@@ -61,6 +64,14 @@ export default class {
         sizes: this.sizes,
       });
     });
+  }
+
+  show() {
+    map(this.medias, (media) => media.show());
+  }
+
+  hide() {
+    map(this.medias, (media) => media.hide());
   }
 
   /**
@@ -94,8 +105,6 @@ export default class {
 
     this.x.target = this.scrollCurrent.x - xDistance;
     this.y.target = this.scrollCurrent.y - yDistance;
-
-    console.log(this.x.target, this.y.target);
   }
 
   onWheel({ pixelX, pixelY }) {
@@ -197,6 +206,6 @@ export default class {
    * Destroy.
    */
   destroy() {
-    // this.group.setParent(null);
+    this.scene.removeChild(this.group);
   }
 }

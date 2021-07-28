@@ -13,8 +13,8 @@ html {
   /*
   * Changing property break scroll event
   */
-  overflow: hidden;
-  position: fixed;
+  // overflow: hidden;
+  // position: fixed;
 
   background: $color-contessa;
   color: $color-quarter-spanish-white;
@@ -33,7 +33,7 @@ body {
   /*
   * Changing property break scroll event
   */
-  position: fixed;
+  // position: fixed;
 }
 
 a {
@@ -42,11 +42,11 @@ a {
   text-decoration: none;
 }
 
-// canvas {
-//   pointer-events: none;
-//   position: relative;
-//   z-index: z("canvas");
-// }
+canvas {
+  pointer-events: none;
+  position: relative;
+  z-index: z("canvas");
+}
 
 button {
   background: none;
@@ -58,7 +58,7 @@ button {
 
 img {
   opacity: 0;
-  // width: 100%;
+  width: 100%;
   transition: opacity 0.4s ease;
   vertical-align: middle;
 

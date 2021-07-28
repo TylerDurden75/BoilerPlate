@@ -1,5 +1,6 @@
-import gsap from "gsap";
 import Prefix from "prefix";
+
+import gsap from "gsap";
 
 import each from "lodash/each";
 import map from "lodash/map";
@@ -15,6 +16,8 @@ import AsyncLoad from "classes/AsyncLoad";
 export default class Page {
   constructor({ element, elements, id }) {
     this.selector = element;
+    this.transformPrefix = Prefix("transform");
+
     this.selectorChildren = {
       ...elements,
       animationsHighlight: '[data-animation="highlight"]',
@@ -26,10 +29,6 @@ export default class Page {
     };
 
     this.id = id;
-
-    this.transformPrefix = Prefix("transform");
-
-    // console.log(this.transformPrefix);
   }
 
   create() {

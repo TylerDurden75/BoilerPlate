@@ -26,7 +26,7 @@ export default class Media {
   }
 
   createTexture() {
-    console.log(this.collections);
+    // console.log(this.collections);
     // const image = this.element.querySelector(
     //   ".collections__gallery__media__image"
     // );

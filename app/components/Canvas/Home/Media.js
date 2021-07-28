@@ -1,4 +1,4 @@
-import { Mesh, Program, Texture } from "ogl";
+import { Mesh, Program } from "ogl";
 
 import gsap from "gsap";
 
@@ -14,8 +14,8 @@ export default class {
     this.scene = scene;
     this.sizes = sizes;
 
-    this.createProgram();
     this.createTexture();
+    this.createProgram();
     this.createMesh();
 
     this.extra = {
@@ -25,12 +25,9 @@ export default class {
   }
 
   createTexture() {
-    this.texture = new Texture(this.gl);
+    const image = this.element;
 
-    this.image = new window.Image();
-    this.image.crossOrigin = "anonymous";
-    this.image.src = this.element.getAttribute("data-src");
-    this.image.onload = (_) => (this.texture.image = this.image);
+    this.texture = window.TEXTURES[image.getAttribute("data-src")];
   }
 
   createProgram() {
@@ -38,6 +35,7 @@ export default class {
       fragment,
       vertex,
       uniforms: {
+        uAlpha: { value: 0 },
         tMap: { value: this.texture },
       },
     });
@@ -61,6 +59,27 @@ export default class {
     this.updateScale();
     this.updateX();
     this.updateY();
+  }
+
+  /**
+   * Animations.
+   */
+  show() {
+    gsap.fromTo(
+      this.program.uniforms.uAlpha,
+      {
+        value: 0,
+      },
+      {
+        value: 0.4,
+      }
+    );
+  }
+
+  hide() {
+    gsap.to(this.program.uniforms.uAlpha, {
+      value: 0,
+    });
   }
 
   /**

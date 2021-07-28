@@ -1,8 +1,6 @@
 import gsap from "gsap";
 import Animation from "classes/Animation";
 
-import each from "lodash/each";
-
 export default class Highlight extends Animation {
   constructor({ element, elements }) {
     super({
@@ -12,21 +10,15 @@ export default class Highlight extends Animation {
   }
 
   animateIn() {
-    this.timeLineIn = gsap.timeline({
-      delay: 0.5,
-    });
-
-    this.timeLineIn.fromTo(
+    gsap.fromTo(
       this.element,
       {
         autoAlpha: 0,
-        scale: 1.2,
+        delay: 0.5,
       },
       {
         autoAlpha: 1,
-        duration: 1.5,
-        ease: "expo.out",
-        scale: 1,
+        duration: 1,
       }
     );
   }
