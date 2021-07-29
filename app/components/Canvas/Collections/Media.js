@@ -22,6 +22,13 @@ export default class {
       x: 0,
       y: 0,
     };
+
+    this.opacity = {
+      current: 0,
+      target: 0,
+      lerp: 0.1,
+      multiplier: 0,
+    };
   }
 
   createTexture() {
@@ -64,20 +71,20 @@ export default class {
    * Animations.
    */
   show() {
-    gsap.from(
-      this.program.uniforms.uAlpha,
+    gsap.fromTo(
+      this.opacity,
       {
-        value: 0,
+        multiplier: 0,
       },
       {
-        value: 1,
+        multiplier: 1,
       }
     );
   }
 
   hide() {
-    gsap.to(this.program.uniforms.uAlpha, {
-      value: 0,
+    gsap.to(this.opacity, {
+      multiplier: 0,
     });
   }
 
@@ -124,9 +131,12 @@ export default class {
       this.extra.y;
   }
 
-  update(scroll) {
+  update(scroll, index) {
     if (!this.bounds) return;
+
     this.updateX(scroll);
     this.updateY();
+
+    this.program.uniforms.uAlpha.value = this.opacity.multiplier;
   }
 }

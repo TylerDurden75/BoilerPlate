@@ -1,12 +1,12 @@
 import { Mesh, Plane, Program } from "ogl";
 
-import GSAP from "gsap";
+import gsap from "gsap";
 
 import fragment from "shaders/plane-fragment.glsl";
 import vertex from "shaders/plane-vertex.glsl";
 
-export default class Media {
-  constructor({ collections, gl, scene, sizes, url }) {
+export default class {
+  constructor({ collections, url, gl, scene, sizes }) {
     this.collections = collections;
     this.gl = gl;
     this.scene = scene;
@@ -26,11 +26,10 @@ export default class Media {
   }
 
   createTexture() {
-    // console.log(this.collections);
-    // const image = this.element.querySelector(
-    //   ".collections__gallery__media__image"
-    // );
-    // this.texture = window.TEXTURES[image.getAttribute("data-src")];
+    console.log(this.collections);
+    // const image = document.querySelector(".collections__gallery__media__image");
+
+    this.texture = window.TEXTURES[image.getAttribute("data-src")];
   }
 
   createProgram() {
@@ -54,11 +53,11 @@ export default class Media {
   }
 
   /**
-   * Animations
+   * Animations.
    */
   transition() {}
 
   /**
-   * Loops
+   * Loops.
    */
 }

@@ -2,8 +2,8 @@ import { Mesh, Program } from "ogl";
 
 import gsap from "gsap";
 
-import fragment from "shaders/plane-fragment.glsl";
-import vertex from "shaders/plane-vertex.glsl";
+import fragment from "shaders/home-fragment.glsl";
+import vertex from "shaders/home-vertex.glsl";
 
 export default class {
   constructor({ element, geometry, gl, index, scene, sizes }) {
@@ -36,6 +36,8 @@ export default class {
       vertex,
       uniforms: {
         uAlpha: { value: 0 },
+        uSpeed: { value: 0 },
+        uViewportSizes: { value: [this.sizes.width, this.sizes.height] },
         tMap: { value: this.texture },
       },
     });
@@ -125,9 +127,11 @@ export default class {
       this.extra.y;
   }
 
-  update(scroll) {
+  update(scroll, speed) {
     if (!this.bounds) return;
     this.updateX(scroll.x);
     this.updateY(scroll.y);
+
+    this.program.uniforms.uSpeed.value = speed;
   }
 }
